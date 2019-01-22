@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <title>DDF个人博客</title>
+    <meta name="keywords" content="个人博客,DDF个人博客" />
+    <meta name="description" content="DDF个人博客" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+{% block css %}
+    <link href="/static/css/base.css" rel="stylesheet">
+    <link href="/static/css/index.css" rel="stylesheet">
+    <link href="/static/css/m.css" rel="stylesheet">
+{% endblock %}
+{% block content1 %}
+<header class="header-navigation" id="header">
+  <nav><div class="logo"><a href="{% url 'ddf:index' %}">DDF个人博客</a></div>
+    <h2 id="mnavh"><span class="navicon"></span></h2>
+    <ul id="starlist">
+      <li><a href="{% url 'ddf:index' %}">网站首页</a></li>
+      <li><a href="{% url 'ddf:share' %}">我的相册</a></li>
+      <li><a href="{% url 'ddf:list' %}">我的日记</a></li>
+      <li><a href="{% url 'ddf:about' %}">关于我</a></li>
+      <li><a href="{% url 'ddf:gbook' %}">留言</a></li>
+      <li><a href="{% url 'ddf:info' %}">内容页</a></li>
+      <li><a href="{% url 'ddf:infopic' %}">内容页</a></li>
+    </ul>
+</nav>
+</header>
+{% endblock %}
+

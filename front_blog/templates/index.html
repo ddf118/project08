@@ -1,0 +1,111 @@
+
+{% extends 'base_main.html' %}
+
+{% block head %}
+    {{ block.super}}
+{% endblock %}
+{% block css %}
+    {{ block.super}}
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/comm.js"></script>
+    <script src="/static/js/modernizr.js"></script>
+{% endblock %}
+{% block content1 %}
+    {{ block.super}}
+{% endblock %}
+{% block content %}
+<article>
+  <aside class="l_box">
+      <div class="about_me">
+        <h2>关于我</h2>
+        <ul>
+          <i><img src="/static/images/4.jpg"></i>
+          <p><b>DDF</b>，一个凡人修仙！08年踏入修仙之路。一直潜心研究修仙技术，修仙之路没有尽头。</p>
+        </ul>
+      </div>
+      <div class="wdxc">
+        <h2>我的相册</h2>
+        <ul>
+          <li><a href="/"><img src="/static/images/7.jpg"></a></li>
+          <li><a href="/"><img src="/static/images/8.jpg"></a></li>
+          <li><a href="/"><img src="/static/images/9.jpg"></a></li>
+          <li><a href="/"><img src="/static/images/10.jpg"></a></li>
+          <li><a href="/"><img src="/static/images/11.jpg"></a></li>
+          <li><a href="/"><img src="/static/images/12.jpg"></a></li>
+        </ul>
+      </div>
+      <div class="search">
+        <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
+          <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字词" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字词'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字词'}" type="text">
+          <input name="show" value="title" type="hidden">
+          <input name="tempid" value="1" type="hidden">
+          <input name="tbname" value="news" type="hidden">
+          <input name="Submit" class="input_submit" value="搜索" type="submit">
+        </form>
+      </div>
+      <div class="fenlei">
+        <h2>文章分类</h2>
+        <ul>
+            {% for category in categories %}
+                <li>
+                    <a href="/">
+                    {{ category.name }}
+                        {% for count in counts %}
+                            {% if category.id == count.category_id %}
+                            ({{ count.id__count }})
+                            {% endif %}
+                        {% endfor %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+      </div>
+      <div class="tuijian">
+        <h2>站长推荐</h2>
+        <ul>
+            {% for article in articles%}
+                <li><a href="/">{{ article.title }}</a></li>
+            {% endfor %}
+        </ul>
+      </div>
+      <div class="links">
+        <h2>友情链接</h2>
+        <ul>
+          <a href="https://ddf118.github.io/">DDF个人博客</a> <a href="https://ddf118.github.io/">DDF博客</a>
+        </ul>
+      </div>
+      <div class="guanzhu">
+        <h2>关注我 么么哒</h2>
+        <ul>
+          <img src="/static/images/wx1.jpg">
+        </ul>
+      </div>
+  </aside>
+  <main class="r_box">
+      {% for article in ddf%}
+      <li><i><a href="/"><img src="/static/images/{{ forloop.counter }}.jpg"></a></i>
+          <h3><a href="/">{{ article.title }}</a></h3>
+          <p>{{ article.describe }}</p>
+      </li>
+      {% endfor %}
+      <li>
+        {% if ddf.has_previous %}
+        <a href="{% url 'ddf:index' %}?page={{ ddf.previous_page_number }}" ><span>&laquo;上一页</span> </a>
+        {% endif %}
+        {% for i in ddf.paginator.page_range %}
+        <a href="{% url 'ddf:index' %}?page={{ i }}">{{ i }}</a>
+        {% endfor %}
+        {% if ddf.has_next %}
+        <a href="{% url 'ddf:index' %}?page={{ ddf.next_page_number }}" ><span>&raquo;下一页</span> </a>
+        {% endif %}
+      </li>
+  </main>
+
+</article>
+<footer>
+  <p>Design by <a href="https://ddf118.github.io/" target="_blank">DDF个人博客</a> <a href="/">蜀ICP备11002373号-1</a></p>
+</footer>
+<a href="#" class="cd-top">Top</a>
+{% endblock %}
